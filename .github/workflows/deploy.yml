@@ -2,11 +2,15 @@ name: CI/CD Pipeline
 
 on:
   push:
-    branches: [ "main" ]
+    branches: [main]
 
 jobs:
   build-and-deploy:
     runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
 
     steps:
     - name: Checkout code
@@ -22,15 +26,21 @@ jobs:
         username: ${{ github.actor }}
         password: ${{ secrets.GITHUB_TOKEN }}
 
-    - name: Build and push Docker image
+    - name: Build Docker image
       run: |
-        docker build -t ghcr.io/${{ github.repository }}:latest .
-        docker push ghcr.io/${{ github.repository }}:latest
+        docker build -t ghcr.io/rtvkongithub/tee-kart-grocery:latest ./backend
 
-    - name: Setup Kubectl
-      uses: azure/setup-kubectl@v3
-
-    - name: Deploy to Kubernetes
+    - name: Push Docker image
       run: |
-        kubectl apply -f k8s/
+        docker push ghcr.io/rtvkongithub/tee-kart-grocery:latest
+
+    # Optional: Deploy to Kubernetes (uncomment if ready)
+    # - name: Set up Kubeconfig
+    #   run: |
+    #     echo "${{ secrets.KUBECONFIG_DATA }}" > kubeconfig
+    #     export KUBECONFIG=$PWD/kubeconfig
+
+    # - name: Deploy to Kubernetes
+    #   run: |
+    #     kubectl apply -f k8s/
 
