@@ -1,0 +1,12 @@
+| **AWS Service**               | **Alternative Used**                                | **Purpose**                           |
+| ----------------------------- | --------------------------------------------------- | ------------------------------------- |
+| **EC2 (VMs)**                 | 🖥️ Local machine / Minikube (K8s cluster)            | Hosting containers & infrastructure   |
+| **ECS / EKS (Containers)**    | 🚢 Minikube (Kubernetes locally)                    | Orchestrate and deploy microservices  |
+| **RDS (Database)**            | 🐘 PostgreSQL in Docker container                   | Database for products                 |
+| **CloudWatch / X-Ray**        | 📊 Prometheus + Grafana                             | Monitoring and alerting               |
+| **ELB / ALB (Load Balancer)** | 🌐 NGINX Ingress Controller                         | Routing traffic to services in K8s    |
+| **IAM (Access control)**      | 🔐 Kubernetes Role-Based Access Control (RBAC)      | Secure K8s components access          |
+| **Route 53 (DNS)**            | 📝 /etc/hosts + Ingress domain like `teekart.local` | Simulate DNS for services             |
+| **CloudFormation / CDK**      | 🧱 Kubernetes YAML + Helm                           | Infrastructure as Code (IaC)          |
+| **Auto Healing (ASG)**        | 🔁 K8s self-healing via Deployments                 | Restart failed pods automatically     |
+| **CloudTrail (Audit)**        | 📁 Git logs + GitHub history                        | Track who changed what and when       |
